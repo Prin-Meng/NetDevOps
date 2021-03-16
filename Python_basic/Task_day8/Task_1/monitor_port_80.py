@@ -7,8 +7,8 @@ x = False
 while True:
     port_info = os.popen("netstat -tulnp").read()
     for line in port_info.split('\n'):
-        if re.match('tcp.+(0.0.0.0:80|0.0.0.0:8000).+LISTEN.+', line):
-            print('HTTP(TCP/80 or TCP/8000)服务已经打开')
+        if re.match('tcp.+0.0.0.0:80.+LISTEN.+', line):
+            print('HTTP(TCP/80)服务已经打开')
             x = True
             break
     else:

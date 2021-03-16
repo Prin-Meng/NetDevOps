@@ -13,6 +13,6 @@ def qytang_ping(ip):
 
 
 if __name__ == '__main__':
-    result = qytang_ping('192.168.0.1')
+    result = qytang_ping('192.168.0.55')
     print(result)
 
