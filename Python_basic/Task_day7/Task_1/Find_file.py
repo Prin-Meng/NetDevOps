@@ -20,12 +20,11 @@ print("方案二：")
 # topdown --可选，为True,则优先遍历top目录，否则优先遍历top的子目录(默认为开启)。如果topdown参数为 True，walk会遍历top文件夹，与top文件夹中每一个子目录。
 for root, dirs, files in os.walk(os.getcwd(), topdown=False):
     for name in files:
-        if name != '':
-            test_file1 = open(name)
-            for line in test_file1.readlines():
-                if re.findall('qytang', line):
-                    print(name)
-                    break
+        test_file1 = open(name)
+        for line in test_file1.readlines():
+            if re.findall('qytang', line):
+                print(name)
+                break
 
 # 清理创建的测试文件
 os.chdir('..')
