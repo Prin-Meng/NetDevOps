@@ -13,6 +13,6 @@ def qytang_ssh(ip, username, password, port=22, cmd='ls'):
 
 
 if __name__ == '__main__':
-    print(qytang_ssh('192.168.0.106', 'prin', 'Cisc0123!'))
-    print(qytang_ssh('192.168.0.106', 'prin', 'Cisc0123!', cmd='pwd'))
+    print(qytang_ssh('192.168.0.106', 'prin', 'Cisc0123'))
+    print(qytang_ssh('192.168.0.106', 'prin', 'Cisc0123', cmd='pwd'))
 

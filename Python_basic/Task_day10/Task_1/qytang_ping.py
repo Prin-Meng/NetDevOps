@@ -10,9 +10,3 @@ def qytang_ping(ip):
         return str(ip) + ' 通！'
     else:
         return str(ip) + ' 不通！'
-
-
-if __name__ == '__main__':
-    result = qytang_ping('192.168.0.11')
-    print(result)
-
