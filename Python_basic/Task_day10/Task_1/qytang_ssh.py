@@ -2,7 +2,7 @@ import paramiko
 import time
 
 
-def qytang_ssh(ip, username, password, port=22, cmd='dis cu'):
+def qytang_ssh(ip, username, password, port=22, cmd='dis cu\n'):
     try:
         ssh = paramiko.SSHClient()
         ssh.load_system_host_keys()
@@ -18,3 +18,4 @@ def qytang_ssh(ip, username, password, port=22, cmd='dis cu'):
 
     except paramiko.ssh_exception.AuthenticationException:
         print("User authentication failed for " + ip + ".")
+        return
