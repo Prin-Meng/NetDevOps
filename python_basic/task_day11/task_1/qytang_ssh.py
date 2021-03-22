@@ -2,6 +2,7 @@ import paramiko
 import time
 
 
+
 def qytang_ssh(ip, username, password, port=22, cmd='dis cu\n'):
     ssh = paramiko.SSHClient()
     ssh.load_system_host_keys()
