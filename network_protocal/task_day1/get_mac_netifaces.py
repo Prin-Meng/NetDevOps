@@ -1,5 +1,4 @@
 import netifaces
-import platform
 import pprint
 
 pp = pprint.PrettyPrinter(indent=4)
