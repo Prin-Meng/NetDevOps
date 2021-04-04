@@ -3,8 +3,6 @@ import re
 import ssh_csr1000v
 import matplotlib
 
-print(matplotlib.matplotlib_fname())
-
 
 def find_netflow_info(ip, username, password, cmd_list, enable):
     # 提取需要的信息
