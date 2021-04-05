@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 import re
 import ssh_csr1000v
-import matplotlib
+
 
 
 def find_netflow_info(ip, username, password, cmd_list, enable):
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     counters = []
     protocols = []
     command = ['show flow monitor name qytang-monitor cache format table\n']
-    netflow_info = find_netflow_info('192.168.1.155', 'Prin', 'Cisco123', command, 'cisco')
+    netflow_info = find_netflow_info('192.168.0.66', 'Prin', 'Cisco123', command, 'cisco')
     for info in netflow_info:
         protocols.append(info[0])
         counters.append(int(info[1]))
