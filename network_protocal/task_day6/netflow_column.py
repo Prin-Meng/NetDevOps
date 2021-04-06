@@ -11,6 +11,7 @@ def find_netflow_info(ip, username, password, cmd_list, enable):
     # 提取需要的信息
     result_raw = qytang_multicmd(ip, username, password, cmd_list, enable, verbose=False)
     netflow_info_raw = re.findall('APP NAME[\s\S]+', result_raw)[0]
+    # 获取协议名称和字节数
     netflow_info = re.findall('\w+\s(\w+)\s+(\d+)', netflow_info_raw)
     return netflow_info
 
@@ -26,9 +27,9 @@ def mat_column(size_list, name_list):
     plt.bar(name_list, size_list, width=0.5, color=color_list)
 
     # 添加主题和注释
-    plt.title('协议与带宽分布')
-    plt.xlabel('带宽(M/s)')
-    plt.ylabel('协议')
+    plt.title('协议与所占字节数分布')
+    plt.xlabel('协议')
+    plt.ylabel('字节数(KB)')
 
     # 保存到图片
     plt.savefig('result1.png')
@@ -43,6 +44,6 @@ if __name__ == "__main__":
     command = ['show flow monitor name qytang-monitor cache format table\n']
     netflow_info = find_netflow_info('192.168.0.66', 'Prin', 'Cisco123', command, 'cisco')
     for info in netflow_info:
-        protocols.append(info[0])
-        counters.append(int(info[1])/15)
+        protocols.append(info[0]+'协议')
+        counters.append(int(info[1])/1000)
     mat_column(counters, protocols)
