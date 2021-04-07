@@ -43,8 +43,9 @@ if __name__ == '__main__':
     # scheduler.add_job(func=qyt_print, args=['test1', 'test2'], trigger='date', run_date=datetime(2019, 3, 26, 10, 17), id='date调度!测试正常打印!')
 
     # 3.interval: 每隔一段时间执行一次weeks=0 | days=0 | hours=0 | minutes=0 | seconds=0, start_date=None, end_date=None, timezone=None
+    print('开始运行！')
     scheduler.add_job(func=write_config_md5_to_db, trigger='interval', minutes=5,
-                      start_date=datetime(2021, 4, 6, 11, 30), end_date=datetime(2021, 4, 6, 12, 0),
+                      start_date=datetime(2021, 4, 6, 11, 36), end_date=datetime(2021, 4, 6, 12, 0),
                       id='interval调度!测试正常打印!')
 
     # 加载事件处理函数
