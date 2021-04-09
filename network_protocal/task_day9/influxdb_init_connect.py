@@ -23,4 +23,3 @@ if __name__ == '__main__':
     retention_result = client.query('show retention policies on "qytdb";')  # 显示数据库中的表
     print(f"Result: {format(retention_result)}")
 
-    print(client.create_database('mem_info'))
