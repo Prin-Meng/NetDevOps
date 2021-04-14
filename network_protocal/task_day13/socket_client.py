@@ -45,7 +45,7 @@ def client_json(ip, port, obj):
         print('收到确认数据:', return_data)
         # 应该考虑写入下载的文件名！但是由于使用了相同的目录测试！所以使用了’download_file.py‘
         with open('download_file.py', 'w+') as f:
-            b4code_back = bytes(return_data['file_bit'], 'utf8')
+            b4code_back = bytes(return_data['file_bit'], 'GBK')
             file_info = base64.b64decode(b4code_back)
             f.write(file_info.decode())
         print('下载文件{0}保存成功！'.format((obj.get('download_file'))))
@@ -64,6 +64,6 @@ if __name__ == '__main__':
     upload_file = {'upload_file': 'snmpv2_get_file.py'}
     client_json('192.168.0.188', port, upload_file)
 
-    # # 下载文件
+    # 下载文件
     download_file = {'download_file': 'snmpv2_get_file.py'}
     client_json('192.168.0.188', port, download_file)

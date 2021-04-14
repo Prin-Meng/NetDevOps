@@ -7,12 +7,13 @@ import base64
 def server_json(ip, port):
     # 创建TCP Socket, AF_INET为IPv4，SOCK_STREAM为TCP
     sockobj = socket(AF_INET, SOCK_STREAM)
+    # 允许socket端口复用
+    sockobj.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
     # 绑定套接字到地址，地址为（host，port）的元组
     sockobj.bind((ip, port))
     # 在拒绝连接前，操作系统可以挂起的最大连接数量，一般配置为5
     sockobj.listen(5)
-    # 允许socket端口复用
-    sockobj.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+
 
     while True:  # 一直接受请求，直到ctl+c终止程序
         try:
