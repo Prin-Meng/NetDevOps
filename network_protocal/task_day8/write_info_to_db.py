@@ -1,5 +1,5 @@
 import pg8000
-from snmpv2_get_cpu import snmpv2_get
+from snmpv2_get import snmpv2_get
 import datetime
 import time
 
