@@ -29,7 +29,7 @@ def get_config_md5(ip, username, password, commands):
 
 def write_config_md5_to_db():
     # 连接对应数据库
-    conn = pg8000.connect(host='192.168.0.105', user='prin', password='Cisc0123', database='dev_info')
+    conn = pg8000.connect(host='192.168.0.109', user='prin', password='Cisc0123', database='dev_info')
     cursor = conn.cursor()
     # 逐个迭代设备，写入数据库
     for device_ip in device_list:

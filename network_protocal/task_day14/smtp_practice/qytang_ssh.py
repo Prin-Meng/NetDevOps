@@ -26,8 +26,9 @@ def qytang_ssh(ip, username, password, cmd_list, enable='', wait_time=2, verbose
         print(x)
     return x
 
+
 if __name__ == '__main__':
     # 执行命令，查看show version的值，和配置OSPF
     commands = ['terminal length 0\n', 'show version\n', 'conf t\n', 'router ospf 1\n',
                 'network 192.168.0.0 0.0.0.255 area 0\n']
-    return_results = qytang_ssh('192.168.0.66', 'Prin', 'Cisco123', commands, 'cisco',verbose=True)
+    return_results = qytang_ssh('192.168.0.66', 'Prin', 'Cisco123', commands, 'cisco', verbose=True)
