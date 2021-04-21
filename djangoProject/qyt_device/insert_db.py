@@ -2,7 +2,7 @@ import django
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoProject.settings')
 django.setup()
-from qyt_devices.models import Devicetype, SNMPtype, DeviceSNMP, Devicedb, Devicecpu
+from qyt_device.models import Devicetype, SNMPtype, DeviceSNMP, Devicedb, Devicecpu
 import time
 from tools.snmpv2_get import snmpv2_get
 
@@ -63,7 +63,7 @@ for dict_info in device_db:
 print('收集信息中......')
 for x in range(25):
     snmpv2_info = snmpv2_get("192.168.0.66", "tcpipro", "1.3.6.1.4.1.9.9.109.1.1.1.1.3.7", port=161)
-    device_cpu_router = Devicecpu(device=Devicedb.objects.get(name='网关路由器'), cpu_uasge=snmpv2_info[1])
+    device_cpu_router = Devicecpu(device=Devicedb.objects.get(name='网关路由器'), cpu_usage=snmpv2_info[1])
     device_cpu_router.save()
     time.sleep(1)
 

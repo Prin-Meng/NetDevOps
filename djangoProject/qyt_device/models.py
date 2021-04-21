@@ -86,7 +86,7 @@ class Devicecpu(models.Model):
                                related_name='cpu_usage',
                                on_delete=models.CASCADE,
                                verbose_name='设备')
-    # 当前CPU利用率
+    # 当前的CPU利用率
     cpu_usage = models.FloatField(default=0, blank=True, verbose_name='当前CPU利用率')
     # 记录时间
     record_datetime = models.DateTimeField(null=True, auto_now_add=True, verbose_name='记录时间')
