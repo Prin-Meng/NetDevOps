@@ -2,8 +2,16 @@ import django
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoProject.settings')
 django.setup()
+from qyt_devices.models import Devicetype, SNMPtype, DeviceSNMP, Devicedb, Devicecpu
+import time
+from tools.snmpv2_get import snmpv2_get
 
-from models import Devicetype, SNMPtype, DeviceSNMP, Devicedb
+# 删除现有的数据
+Devicecpu.objects.all().delete()
+Devicedb.objects.all().delete()
+Devicetype.objects.all().delete()
+DeviceSNMP.objects.all().delete()
+SNMPtype.objects.all().delete()
 
 # --------------------------设备类型------------------------------
 device_type = ['CSR1000v']
@@ -52,10 +60,22 @@ for dict_info in device_db:
     )
     device_db_router.save()
 # --------------------------设备CPU信息----------------------------
-# snmp_info = snmpv2_get("192.168.0.66", "tcpipro", "1.3.6.1.4.1.9.9.109.1.1.1.1.3.7", port=161)
-# for x in range(50):
-#     device_cpu_router = Devicecpu(device=Devicedb.objects.get(name='网关路由器'), cpu_uasge=int(snmp_info[1]))
-#     device_cpu_router.save()
-#     sleep(1)
-#
-# cpu_info =
+print('收集信息中......')
+for x in range(25):
+    snmpv2_info = snmpv2_get("192.168.0.66", "tcpipro", "1.3.6.1.4.1.9.9.109.1.1.1.1.3.7", port=161)
+    device_cpu_router = Devicecpu(device=Devicedb.objects.get(name='网关路由器'), cpu_uasge=snmpv2_info[1])
+    device_cpu_router.save()
+    time.sleep(1)
+
+gw = Devicedb.objects.get(name='网关路由器')
+print(gw)
+
+# 进行外键搜素
+snmp_info = gw.type.devicesnmp.all()
+
+for snmp in snmp_info:
+    print(f"SNMP类型:{snmp.snmp_type.name:<20}| OID:{snmp.oid}")
+
+cpu_info = gw.cpu_usage
+for cpu in cpu_info:
+    print(f"CPU利用率:{cpu.cpu_usage:<5}| 记录时间:{cpu.record_datetime.strftime('%Y-%m-%d %H:%M:%S')}")

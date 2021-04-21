@@ -36,9 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'qyt_device.apps.Qyt_deviceConfig',
     'qyt_devices',
-    # 'qyt_device.models.models'
 ]
 
 MIDDLEWARE = [
@@ -115,7 +113,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")

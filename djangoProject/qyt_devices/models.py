@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Devicetype(models.Model):
     # 设备类型名称
     name = models.CharField(max_length=100, unique=True, blank=False, verbose_name='设备类型名称')
@@ -88,12 +87,12 @@ class Devicecpu(models.Model):
                                on_delete=models.CASCADE,
                                verbose_name='设备')
     # 当前CPU利用率
-    cpu_uasge = models.FloatField(default=0, blank=True, verbose_name='当前CPU利用率')
+    cpu_usage = models.FloatField(default=0, blank=True, verbose_name='当前CPU利用率')
     # 记录时间
     record_datetime = models.DateTimeField(null=True, auto_now_add=True, verbose_name='记录时间')
 
     def __str__(self):
         return f"{self.__class__.__name__}(设备名称:{self.device.name})" \
-               f"| CPU利用率:{self.cpu_uasge}" \
+               f"| CPU利用率:{self.cpu_usage}" \
                f"| 记录时间:{self.record_datetime.strftime('%Y-%m-%d %H:%M:%S')})"
 
