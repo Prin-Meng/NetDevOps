@@ -2,9 +2,9 @@ import django
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoProject.settings')
 django.setup()
-from qyt_device.models import Devicetype, SNMPtype, DeviceSNMP, Devicedb, Devicecpu
 import time
 from tools.snmpv2_get import snmpv2_get
+from qyt_devices.models import Devicetype, SNMPtype, DeviceSNMP, Devicedb, Devicecpu
 
 # 删除现有的数据
 Devicecpu.objects.all().delete()
@@ -76,6 +76,6 @@ snmp_info = gw.type.devicesnmp.all()
 for snmp in snmp_info:
     print(f"SNMP类型:{snmp.snmp_type.name:<20}| OID:{snmp.oid}")
 
-cpu_info = gw.cpu_usage
+cpu_info = gw.cpu_usage.all()
 for cpu in cpu_info:
     print(f"CPU利用率:{cpu.cpu_usage:<5}| 记录时间:{cpu.record_datetime.strftime('%Y-%m-%d %H:%M:%S')}")
