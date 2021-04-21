@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'qyt_device.apps.Qyt_deviceConfig',
+    'qyt_devices',
+    # 'qyt_device.models.models'
 ]
 
 MIDDLEWARE = [
