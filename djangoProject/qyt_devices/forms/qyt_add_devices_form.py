@@ -31,8 +31,8 @@ class AddDeviceForm(forms.Form):
     # 设备描述信息
     description = forms.CharField(
         label='描述',
-        required=True,
-        widget=forms.TextInput(attrs={"class": "form-control"})
+        required=False,
+        widget=forms.Textarea(attrs={"class": "form-control"})
     )
 
     # SNMP只读Community
@@ -84,9 +84,9 @@ class AddDeviceForm(forms.Form):
     )
 
     # 对IP地址的唯一性进行校验,注意格式为clean+校验变量
-    def clean_ip_address(self):
+    def clean_ip(self):
         # 提取客户输入的IP地址
-        ip_address = self.changed_data['ip']
+        ip_address = self.cleaned_data['ip']
         # 在数据库中查找是否存在这个IP地址
         existing = Devicedb.objects.filter(ip=ip_address).exists()
         # 如果存在就显示校验错误信息
@@ -95,7 +95,7 @@ class AddDeviceForm(forms.Form):
         # 如果校验成功就返回IP地址
         return ip_address
 
-    def clean_password(self):
+    def clean_ssh_password(self):
         password = self.cleaned_data['ssh_password']
         username = self.cleaned_data['ssh_username']
         # 查看用户名和密码是否都填写完成
