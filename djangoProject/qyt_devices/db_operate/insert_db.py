@@ -3,7 +3,7 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoProject.settings')
 django.setup()
 import time
-from tools.snmpv2_get import snmpv2_get
+from qyt_devices.tools.snmpv2_get import snmpv2_get
 from qyt_devices.models import Devicetype, SNMPtype, DeviceSNMP, Devicedb, Devicecpu
 
 # 删除现有的数据

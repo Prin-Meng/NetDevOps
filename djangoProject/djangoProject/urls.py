@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from views.index import index
+from qyt_devices.views.qyt_add_devices import add_devices
+from qyt_devices.views.qyt_show_devices import show_devices
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
+    path('add_devices', add_devices),
+    path('show_devices', show_devices),
 ]
