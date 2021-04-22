@@ -49,13 +49,13 @@ class AddDeviceForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "form-control"})
     )
 
-    # SSH密码
-    ssh_password = forms.CharField(
+    # SSH用户名
+    ssh_username = forms.CharField(
         max_length=50,
         min_length=2,
-        label='SSH密码',
+        label='SSH用户名',
         required=False,
-        widget=forms.PasswordInput(attrs={"class": "form-control"})
+        widget=forms.TextInput(attrs={"class": "form-control"})
     )
 
     # enable密码
