@@ -58,6 +58,14 @@ class AddDeviceForm(forms.Form):
         widget=forms.TextInput(attrs={"class": "form-control"})
     )
 
+    # SSH密码
+    ssh_password = forms.CharField(
+        max_length=50,
+        min_length=2,
+        label='SSH密码',
+        required=False,
+        widget=forms.PasswordInput(attrs={"class": "form-control"})
+    )
     # enable密码
     enable_password = forms.CharField(
         max_length=50,
