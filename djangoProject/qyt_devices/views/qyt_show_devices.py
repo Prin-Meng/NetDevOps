@@ -2,7 +2,7 @@ from django.shortcuts import render
 from qyt_devices.models import Devicedb
 
 
-def show_devices(request):
+def show_devices(request, successmessage=None, errormessage=None):
     # 查询整个数据库的信息 object.all()
     result = Devicedb.objects.all()
     # 最终得到设备清单devices_list，清单内部是每一个设备信息的字典
@@ -25,4 +25,6 @@ def show_devices(request):
         # 提取学员详细信息，并写入字典
         devices_list.append(devices_dict)
 
-    return render(request, 'qyt_show_devices_info.html', {'devices_list': devices_list})
+    return render(request, 'qyt_show_devices_info.html', {'devices_list': devices_list,
+                                                          'successmessage': successmessage,
+                                                          'errormessage': errormessage})
