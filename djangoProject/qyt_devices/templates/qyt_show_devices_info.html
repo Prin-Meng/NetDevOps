@@ -6,13 +6,15 @@
 
 {% block head %}
     {% load static %}
-    <link rel="stylesheet" href="{% static "css/jquery.dataTables.min.css"%}">
+{#    <link rel="stylesheet" href="{% static "css/jquery.dataTables.min.css"%}">#}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 {% endblock head %}
 
 {% block js %}
     {% load static %}
     <script src="{% static "js/jquery.min.js"%}" crossorigin="anonymous"></script>
-    <script src="{% static "js/jquery.dataTables.min.js"%}" crossorigin="anonymous"></script>
+{#    <script src="{% static "js/jquery.dataTables.min.js"%}" crossorigin="anonymous"></script>#}
+    <script src="{% static "js/jquery.dataTables2.min.js"%}"></script>
 {% endblock js %}
 
 {% block body %}
@@ -55,11 +57,11 @@
           <td>{{ device.create_datetime | date:'Y-m-d H:i' }}</td>
           {# 添加删除和编辑按钮 #}
           {# href嵌入传入的删除和编辑的超链接 #}
-          {# onclick="return confirmAct() 用于在删除对象之前显示确认删除的警告信息 #}
-          {# data-toggle="tooltip" data-placement="top" title="删除此设备信息" 用于显示按钮的提示信息 #}
-          {# class="badge badge-danger" class="badge badge-success" bootstrap渲染按钮的类型 #}
+{#           onclick="return confirmAct() 用于在删除对象之前显示确认删除的警告信息 #}
+{#           data-toggle="tooltip" data-placement="top" title="删除此设备信息" 用于显示按钮的提示信息 #}
+{#           class="badge badge-danger" class="badge bg-success" bootstrap渲染按钮的类型 #}
           <td>
-              <a href="{{ device.id_delete }}" onclick="return confirmAct();" data-toggle="tooltip" data-placement="top" title="删除此设备信息" class="badge badge-danger">删除</a>
+              <a href="{{ device.id_delete }}" onclick="return confirmAct();" data-toggle="tooltip" data-placement="top" title="删除此设备信息" class="badge bg-danger">删除</a>
           </td>
         </tr>
         {% endfor %}
@@ -67,16 +69,11 @@
     </table>
     </div>
 
-    {# DataTable渲染显示设备信息的Table #}
-    {# 需要加载如下的CSS和JS #}
-    {# <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> #}
-    {# <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> #}
-
    <script>
         $(document).ready( function () {
             $('#QYT_Table').DataTable();
         } );
-    </script>
+   </script>
 
 {#     提示删除确认警告的JavaScript#}
     <script type="text/javascript">
