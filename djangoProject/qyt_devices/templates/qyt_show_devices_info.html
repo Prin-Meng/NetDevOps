@@ -22,7 +22,7 @@
 
     {# 创建显示学员信息的Table,注意id="QYT_Table", 后续DataTable JavaScript就对这个ID的Table进行渲染优化 #}
     <table class="table table-bordered" id="QYT_Table">
-      <thead class="thead-dark">
+      <thead class="table-dark">
         <tr>
           <th scope="col">#</th>
           <th scope="col">唯一ID</th>
@@ -58,7 +58,8 @@
           {# onclick="return confirmAct() 用于在删除对象之前显示确认删除的警告信息 #}
           {# data-toggle="tooltip" data-placement="top" title="删除此设备信息" 用于显示按钮的提示信息 #}
           {# class="badge badge-danger" class="badge badge-success" bootstrap渲染按钮的类型 #}
-          <td><a href="{{ device.id_delete }}" onclick="return confirmAct();" data-toggle="tooltip" data-placement="top" title="删除此设备信息" class="badge badge-danger">删除</a>
+          <td>
+              <a href="{{ device.id_delete }}" onclick="return confirmAct();" data-toggle="tooltip" data-placement="top" title="删除此设备信息" class="badge badge-danger">删除</a>
           </td>
         </tr>
         {% endfor %}
