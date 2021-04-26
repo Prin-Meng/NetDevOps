@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'qytangdb',
         'USER': 'qytangdbuser',
         'PASSWORD': 'Cisc0123',
-        'HOST': '192.168.0.109',
+        'HOST': '192.168.0.166',
         'PORT': '',
     }
 }
