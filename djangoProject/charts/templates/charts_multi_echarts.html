@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    乾颐堂图标(echarts)
+{% endblock title %}
+
+{% block js %}
+    {% load static %}
+    <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script src="{% static 'js/qytang_echarts_functions.js' %}"></script>
+    <script src="{% static "js/jquery.min.js" %}"></script>
+{% endblock js %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="jumbotron">
+          <h1 style="color: #666666">乾颐堂图表测试(Echarts)</h1>
+            <hr class="my-4">
+          <p>多图Echarts测试</p>
+        </div>
+
+         <div class="row">
+            <div class="col-md-6">
+                <div class="card" style="height: 500px">
+                    <div class="card-header">柱状图表测试(静态数据)</div>
+                    <div class="card-body">
+                        <div id="chart1" style="width:600px;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card" style="height: 500px">
+                    <div class="card-header">柱状图表测试(Django数据 & AJAX数据) <button onClick="updatachart2();">刷新</button></div>
+                    <div class="card-body">
+                        <div id="chart2" style="width:600px;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

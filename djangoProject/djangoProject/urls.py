@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from views.index import index
 from qyt_devices.views.qyt_add_devices import add_devices
 from qyt_devices.views.qyt_show_devices import show_devices
@@ -26,4 +26,5 @@ urlpatterns = [
     path('add_devices', add_devices),
     path('show_devices', show_devices),
     path('delete_device/<int:device_id>', delete_devices),
+    path('charts/', include(('charts.urls', 'charts'), namespace='charts')),
 ]
