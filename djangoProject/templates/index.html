@@ -3,8 +3,69 @@
     {{ qyt_title }}
 {% endblock title %}
 
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/bootstrap.jumbotron.min.css"%}">
+        <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+{% endblock %}
+
+
 {% block body %}
 <div class="container-fluid">
-    <h1>{{ qyt_body }}</h1>
+<main>
+  <div class="container py-4">
+
+    <div class="p-5 mb-4 text-white bg-dark rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">乾颐堂网管中心</h1>
+        <p class="col-md-8 fs-4">帮助您更好的管理网络设备。</p>
+        <button class="btn btn-primary btn-lg" type="button">更多信息</button>
+      </div>
+    </div>
+
+    <div class="row align-items-md-stretch">
+      <div class="col-md-4">
+        <div class="h-100 p-5 bg-light rounded-3">
+          <h2 style="text-align:center">上网流量限制</h2>
+          {% load static %}
+          <a href="/" class="float-left"><img src="{% static "images/logo6.png"%}" height="265" width="auto"></a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="h-100 p-5 bg-light rounded-3">
+          <h2 style="text-align:center">上网流量审计</h2>
+          {% load static %}
+           <a href="/" class="float-left"><img src="{% static "images/logo7.png"%}" height="265" width="auto"></a>
+        </div>
+      </div>
+        <div class="col-md-4">
+        <div class="h-100 p-5 bg-light rounded-3">
+          <h2 style="text-align:center">流量监管</h2>
+          {% load static %}
+           <a href="/" class="float-left"><img src="{% static "images/logo8.png"%}" height="265" width="auto"></a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      &copy; 2021
+    </footer>
+  </div>
+</main>
 </div>
 {% endblock body %}
