@@ -6,15 +6,14 @@
 
 {% block head %}
     {% load static %}
-{#    <link rel="stylesheet" href="{% static "css/jquery.dataTables.min.css"%}">#}
+    <link rel="stylesheet" href="{% static "css/jquery.dataTables.min.css"%}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 {% endblock head %}
 
 {% block js %}
     {% load static %}
     <script src="{% static "js/jquery.min.js"%}" crossorigin="anonymous"></script>
-{#    <script src="{% static "js/jquery.dataTables.min.js"%}" crossorigin="anonymous"></script>#}
-    <script src="{% static "js/jquery.dataTables2.min.js"%}"></script>
+    <script src="{% static "js/jquery.dataTables.min.js"%}" crossorigin="anonymous"></script>
 {% endblock js %}
 
 {% block body %}
@@ -22,6 +21,7 @@
         <br><h2 style="color: #666666">乾颐堂设备信息查询</h2><br>
     {% include "qyt_3_message.html" %}
 
+    </div>
     {# 创建显示学员信息的Table,注意id="QYT_Table", 后续DataTable JavaScript就对这个ID的Table进行渲染优化 #}
     <table class="table table-bordered" id="QYT_Table">
       <thead class="table-dark">
