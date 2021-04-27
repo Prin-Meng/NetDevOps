@@ -62,7 +62,7 @@ def change_time(datetime_obj):
     return int(time.mktime(datetime_obj.timetuple())) * 1000
 
 
-def echarts_final_line_ajax_cpu_usage(request):
+def ajax_final_line_cpu(request):
     cpu_time_list_1 = []
     cpu_time_list_2 = []
     now_time = datetime.now()
@@ -82,25 +82,25 @@ def echarts_final_line_ajax_cpu_usage(request):
                          'starttime': date.today().strftime('%Y-%m-%d')})
 
 
-def ajax_final_line_cpu(request):
-    cpu_time_list_1 = []
-    cpu_time_list_2 = []
-    now_time = datetime.now()
-    # 产生时间和利用率对的列表
-    for i in range(1000):
-        cpu_time_list_1.append([change_time(now_time + timedelta(minutes=i)), randint(1, 100)])
-        cpu_time_list_2.append([change_time(now_time + timedelta(minutes=i)), randint(1, 100)])
-    # [[time, int], [time, int], [time, int], [time, int], [time, int], [time, int]]
-    cpu_datas = [
-        line_data('R1 CPU利用率', cpu_time_list_1, '#00BFFF'),
-        line_data('R2 CPU利用率', cpu_time_list_2, '#FF3300'),
-    ]
-
-    return JsonResponse({'labelname': 'CPU利用率',
-                         'legends': [x['name'] for x in cpu_datas],
-                         'datas': cpu_datas,
-                         'starttime': date.today().strftime('%Y-%m-%d')})
-
-
 def ajax_final_line_int(request):
-    pass
+    # 产生随机数据
+    g1_up_time_speed_list = []
+    g1_down_time_speed_list = []
+    now_time = datetime.now()
+    for i in range(1000):
+        # [[time, int], [time, int], [time, int], [time, int], [time, int], [time, int]]
+        g1_up_time_speed_list.append(
+            [change_time(now_time + timedelta(minutes=i * 30)),
+             randint(40, 60)])
+        g1_down_time_speed_list.append(
+            [change_time(now_time + timedelta(minutes=i * 30)),
+             randint(30, 70)])
+        i += 1
+
+    speed_datas = [line_data('G1 up流量', g1_up_time_speed_list, '#00BFFF'),
+                   line_data('G1 down流量', g1_down_time_speed_list, '#FF3300')]
+
+    return JsonResponse({'labelname': '接口速率',
+                         'legends': [x['name'] for x in speed_datas],
+                         'datas': speed_datas,
+                         'starttime': date.today().strftime('%Y-%m-%d')})
