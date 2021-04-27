@@ -9,7 +9,7 @@ from qyt_devices.models import Devicetype, SNMPtype, DeviceSNMP, Devicedb, Devic
 
 
 # 删除现有的数据
-# Devicecpu.objects.all().delete()
+Devicecpu.objects.all().delete()
 Devicedb.objects.all().delete()
 Devicetype.objects.all().delete()
 DeviceSNMP.objects.all().delete()

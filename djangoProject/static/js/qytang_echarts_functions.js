@@ -111,14 +111,14 @@ function echarts_pie(chartid, labelname, labels, datas){
             },
             series: [
                 {
-                    name:'报名方向', // 本圈的大标题
+                    name:labelname, // 本圈的大标题
                     type:'pie', // 饼状图
                     radius: ['50%', '70%'], //小圈 和 大圈的大小
                     avoidLabelOverlap: false,
                     label: {
                         //是否显示名字在侧面
                         normal: {
-                            show: false,
+                            show: true,
                             position: 'center'
                         },
                         // 是否在饼中间显示名字

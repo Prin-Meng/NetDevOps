@@ -17,4 +17,4 @@ def gratuitous_arp(ip_address):  # 发送无故ARP请求并等待响应
 
 
 if __name__ == '__main__':
-    gratuitous_arp('192.168.0.66')
+    gratuitous_arp('192.168.0.107')

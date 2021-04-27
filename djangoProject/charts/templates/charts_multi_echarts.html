@@ -15,18 +15,17 @@
     <div class="container-fluid">
 
         <div class="col-md-12 py-1">
-        <div class="h-100 p-5 text-white bg-dark rounded-3">
-            <h1 class="display-5 fw-bold">乾颐堂图表测试(Echarts)</h1>
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h1 class="display-5 fw-bold">乾颐堂图表测试(Echarts)</h1>
+            </div>
         </div>
 
-      </div>
-
-         <div class="row">
+        <div class="row">
             <div class="col-md-6">
                 <div class="card" style="height: 500px">
                     <div class="card-header">柱状图表测试(静态数据)</div>
                     <div class="card-body">
-                        <div id="chart1" style="width:500px;height:400px;"></div>
+                        <div id="chart1" style="width:600px;height:400px;"></div>
                     </div>
                 </div>
             </div>
@@ -34,7 +33,7 @@
                 <div class="card" style="height: 500px">
                     <div class="card-header">柱状图表测试(Django数据 & AJAX数据) <button onClick="updatachart2();">刷新</button></div>
                     <div class="card-body">
-                        <div id="chart2" style="width:500px;height:400px;"></div>
+                        <div id="chart2" style="width:600px;height:400px;"></div>
                     </div>
                 </div>
             </div>
@@ -47,12 +46,57 @@
                         [1, 20, 30, 10, 42, 66],
                         'red');
             echarts_compound("chart2", "{{ chart2_label }}", {{ chart2_legends|safe }}, {{ chart2_time|safe }}, {{ chart2_data|safe }})
-        </script>
-{#          手动刷新chart2#}
-        <script type="text/javascript">
+            </script>
+            {#          手动刷新chart2#}
+            <script type="text/javascript">
             function updatachart2()
             {
                 ajax_render_echart('/charts/ajax/chart2', "chart2");
+            }
+        </script>
+
+        <div class="row py-2">
+            <div class="col-md-4 py-1">
+                <div class="card">
+                    <div class="card-header">饼状图表测试1(静态数据)</div>
+                    <div class="card-body">
+                        <div id="chDonut1" style="width:400px;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 py-1">
+                <div class="card">
+                    <div class="card-header">饼状图表测试2(Django数据)</div>
+                    <div class="card-body">
+                        <div id="chDonut2" style="width:400px;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 py-1">
+                <div class="card">
+                    <div class="card-header">饼状图表测试3(AJAX数据) <button onClick="updatapie3();">刷新</button> </div>
+                    <div class="card-body">
+                        <div id="chDonut3" style="width:400px;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        {# 手工初始化数据 #}
+            echarts_pie("chDonut1",
+                        "速率比例",
+                        ['出方向', '入方向'],
+                        [{value:20, name:'出方向'}, {value:30, name:'入方向'}]);
+            {#echarts_pie("chDonut2", {{ pie2_label|safe }}, {{ pie2_protocol|safe }}, {{ pie2_data|safe }});#}
+            {# AJAX返回数据 #}
+            {#ajax_render_pie('/charts_test/ajax/pie3', "chDonut3")#}
+        </script>
+
+        {# 手动刷新pie3 #}
+        <script type="text/javascript">
+            function updatapie3()
+            {
+                ajax_render_pie('/charts_test/ajax/pie3', "chDonut3");
             }
         </script>
 
