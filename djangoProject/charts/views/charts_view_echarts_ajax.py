@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from charts.views.charts_get_data_from_db import return_data_from_db
 from qyt_devices.models import Devicedb
 from random import randint
-from datetime import timedelta, datetime, timezone, date
+from datetime import timedelta, datetime, date
 import time
 
 
