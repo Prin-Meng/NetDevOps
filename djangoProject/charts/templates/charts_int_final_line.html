@@ -29,14 +29,14 @@
         </div>
         <script type="text/javascript">
             {# AJAX返回数据 #}
-            get_json_render_echart_line_cpu_usage('/charts/ajax/final_line_int', "final_line")
+            get_json_render_echart_line_if_speed('/charts/ajax/final_line_int', "final_line")
         </script>
 
         {# 手动刷新pie3 #}
         <script type="text/javascript">
             function updatapie1()
             {
-                get_json_render_echart_line_cpu_usage('/charts/ajax/final_line_int', "final_line");
+                get_json_render_echart_line_if_speed('/charts/ajax/final_line_int', "final_line");
             }
         </script>
     </div>
