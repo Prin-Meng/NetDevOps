@@ -118,7 +118,7 @@ function echarts_pie(chartid, labelname, labels, datas){
                     label: {
                         //是否显示名字在侧面
                         normal: {
-                            show: true,
+                            show: false,
                             position: 'center'
                         },
                         // 是否在饼中间显示名字

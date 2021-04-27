@@ -87,16 +87,16 @@
                         "速率比例",
                         ['出方向', '入方向'],
                         [{value:20, name:'出方向'}, {value:30, name:'入方向'}]);
-            {#echarts_pie("chDonut2", {{ pie2_label|safe }}, {{ pie2_protocol|safe }}, {{ pie2_data|safe }});#}
+            echarts_pie("chDonut2", {{ pie2_label|safe }}, {{ pie2_protocol|safe }}, {{ pie2_data|safe }});
             {# AJAX返回数据 #}
-            {#ajax_render_pie('/charts_test/ajax/pie3', "chDonut3")#}
+            ajax_render_pie('/charts/ajax/pie3', "chDonut3")
         </script>
 
         {# 手动刷新pie3 #}
         <script type="text/javascript">
             function updatapie3()
             {
-                ajax_render_pie('/charts_test/ajax/pie3', "chDonut3");
+                ajax_render_pie('/charts/ajax/pie3', "chDonut3");
             }
         </script>
 

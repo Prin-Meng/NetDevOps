@@ -81,10 +81,10 @@ for x in range(50):
 
     device_cpu_router.save()
 
-    snmpv2_info = snmpv2_get("192.168.0.88", "tcpipro", "1.3.6.1.4.1.9.9.109.1.1.1.1.3.7", port=161)
-    device_cpu_router = Devicecpu(device=Devicedb.objects.get(name='核心路由器'), cpu_usage=snmpv2_info[1])
-
-    device_cpu_router.save()
+    # snmpv2_info = snmpv2_get("192.168.0.88", "tcpipro", "1.3.6.1.4.1.9.9.109.1.1.1.1.3.7", port=161)
+    # device_cpu_router = Devicecpu(device=Devicedb.objects.get(name='核心路由器'), cpu_usage=snmpv2_info[1])
+    #
+    # device_cpu_router.save()
 
     time.sleep(1)
 
