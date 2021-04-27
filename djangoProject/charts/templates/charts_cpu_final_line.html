@@ -6,12 +6,12 @@
 
 {% block head %}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-{% endblock %}
+{% endblock head%}
 
 {% block js %}
     {% load static %}
     <script src="{% static 'js/echarts.min.js' %}"></script>
-    <script src="{% static 'js/qytang_echarts_functions.js' %}"></script>
+    <script src="{% static 'js/qytang_final_line.js' %}"></script>
     <script src="{% static "js/jquery.min.js" %}"></script>
 {% endblock js %}
 
@@ -20,7 +20,7 @@
         <div class="row py-2">
             <div class="col-lg-12 py-1">
                 <div class="card">
-                    <div class="card-header">终极线性图AJAX <button onClick="updatapie1();">刷新</button> </div>
+                    <div class="card-header"> <font color="#778899"><b> 终极线性图AJAX </b></font> <button onClick="updataline1();">刷新</button> </div>
                     <div class="card-body">
                         <div id="final_line" style="width:1200px;height:800px;"></div>
                     </div>
@@ -34,7 +34,7 @@
 
         {# 手动刷新pie3 #}
         <script type="text/javascript">
-            function updatapie1()
+            function updataline1()
             {
                 get_json_render_echart_line_cpu_usage('/charts/ajax/final_line_cpu', "final_line");
             }

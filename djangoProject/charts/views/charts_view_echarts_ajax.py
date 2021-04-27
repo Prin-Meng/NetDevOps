@@ -20,42 +20,42 @@ def ajax_pie3(request):
     pie3_protocol = ['HTTP', 'Telnet', 'SSH', 'ICMP']
     pie3_data = [{'value': randint(20, 100), 'name': p} for p in pie3_protocol]
 
-    return JsonResponse({'lablename': pie3_label,
+    return JsonResponse({'labelname': pie3_label,
                          # 协议列表
                          'labels': pie3_protocol,
                          # 协议数据
-                         'datas': pie3_data, })
+                         'datas': pie3_data})
 
 
 # 产生每一条线数据的函数
 def line_data(name, time_data_list, color):
     return {
-                'symbolSize': 0,  # 这个参数表示在图像上显示的原点大小，为0则不显示
-                'symbol': 'circle',
-                'name': name,
-                'type': 'line',
-                'smooth': True,
-                'smoothMonotone': True,
-                'data': time_data_list,
-                'areaStyle': {
-                    'color': color
-                },
-                'markPoint': {
-                    'itemStyle': {
-                      'color': color
-                    },
-                    'data': [
-                        {'type': 'max', 'name': '最大值'},
-                        {'type': 'min', 'name': '最小值'}
-                    ]
-                },
-                'lineStyle': {
-                    'color': color
-                },
-                'itemStyle': {
-                    'color': color
-                }
-            }
+        'symbolSize': 0,  # 这个参数表示在图像上显示的原点大小，为0则不显示
+        'symbol': 'circle',
+        'name': name,
+        'type': 'line',
+        'smooth': True,
+        'smoothMonotone': True,
+        'data': time_data_list,
+        'areaStyle': {
+            'color': color
+        },
+        'markPoint': {
+            'itemStyle': {
+                'color': color
+            },
+            'data': [
+                {'type': 'max', 'name': '最大值'},
+                {'type': 'min', 'name': '最小值'}
+            ]
+        },
+        'lineStyle': {
+            'color': color
+        },
+        'itemStyle': {
+            'color': color
+        }
+    }
 
 
 def change_time(datetime_obj):
@@ -72,9 +72,9 @@ def ajax_final_line_cpu(request):
         cpu_time_list_2.append([change_time(now_time + timedelta(minutes=i)), randint(1, 100)])
     # [[time, int], [time, int], [time, int], [time, int], [time, int], [time, int]]
     cpu_datas = [
-                 line_data('R1 CPU利用率', cpu_time_list_1, '#00BFFF'),
-                 line_data('R2 CPU利用率', cpu_time_list_2, '#FF3300'),
-                ]
+        line_data('R1 CPU利用率', cpu_time_list_1, '#00BFFF'),
+        line_data('R2 CPU利用率', cpu_time_list_2, '#FF3300'),
+    ]
 
     return JsonResponse({'labelname': 'CPU利用率',
                          'legends': [x['name'] for x in cpu_datas],
