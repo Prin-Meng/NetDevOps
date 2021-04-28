@@ -1,8 +1,17 @@
 from django.shortcuts import render
 from qyt_devices.models import Devicedb
+from django.http import HttpResponseRedirect
 
 
 def show_devices(request, successmessage=None, errormessage=None):
+    # 没有登录
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/accounts/login?next=/show_devices')
+    # 登录但没有权限
+    elif not request.session.get('device_view_permission') and request.user.is_authenticated:
+        errormessage = '您无权访问此页面'
+        return render(request, 'permission_deny.html', {'errormessage': errormessage})
+
     # 查询整个数据库的信息 object.all()
     result = Devicedb.objects.all()
     # 最终得到设备清单devices_list，清单内部是每一个设备信息的字典

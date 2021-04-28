@@ -19,10 +19,10 @@ def qyt_login(request):
             request.session['fname'] = request.user.first_name
             # 如果属于employee组，就设置device_permission会话变量
             if Group.objects.get(name='employee') in user.groups.all():
-                request.session['device_permission'] = True
+                request.session['device_view_permission'] = True
             # 如果用户有'qyt_devices.view_devicedb'权限，就设置device_permission会话变量
             elif 'qyt_devices.view_devicedb' in request.user.get_user_permissions():
-                request.session['device_permission'] = True
+                request.session['device_view_permission'] = True
             # 重定向回触发重定向的初始页面
             next_url = request.GET.get('next', '/')
             return HttpResponseRedirect(next_url)
