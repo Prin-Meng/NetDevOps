@@ -19,6 +19,7 @@ from views.index import index
 from qyt_devices.views.qyt_add_devices import add_devices
 from qyt_devices.views.qyt_show_devices import show_devices
 from qyt_devices.views.qyt_delete_devices import delete_devices
+from views.qytang_login import qyt_login, qyt_logout
 
 
 urlpatterns = [
@@ -28,4 +29,7 @@ urlpatterns = [
     path('show_devices', show_devices),
     path('delete_device/<int:device_id>', delete_devices),
     path('charts/', include(('charts.urls', 'charts'), namespace='charts')),
+    # 登录、登出，固定URL不能改变
+    path('accounts/login/', qyt_login),
+    path('accounts/logout/', qyt_logout),
 ]
