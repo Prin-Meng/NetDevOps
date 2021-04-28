@@ -3,8 +3,10 @@ from qyt_devices.models import Devicedb
 from charts.views.charts_get_data_from_db import return_data_from_db
 from random import randint
 import json
+from django.contrib.auth.decorators import login_required
 
 
+@login_required()
 def multi_echarts(request):
     all_data = return_data_from_db(Devicedb.objects.all(), ['#00BFFF', '#FF3300'], ['line', 'bar'], last_hours=1)
 
