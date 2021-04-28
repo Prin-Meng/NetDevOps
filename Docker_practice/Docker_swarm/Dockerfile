@@ -1,12 +1,13 @@
 # syntax=docker/dockerfile:1
-FROM python:3.7-alpine
+FROM centos
 WORKDIR /code
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
-RUN apk add --no-cache gcc musl-dev linux-headers
+
+RUN  yum -y install python3 vim net-tools bind-utils
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
+
 EXPOSE 5000
-COPY . .
+COPY app.py /code/app.py
 CMD ["flask", "run"]
