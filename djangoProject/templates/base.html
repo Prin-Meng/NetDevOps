@@ -59,6 +59,15 @@
                 <li><a class="dropdown-item" href="/charts/int_final_line">Echarts终极线性图(接口速率)</a></li>
               </ul>
             </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                上传下载
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="/charts/multi_echarts">上传文件</a></li>
+                <li><a class="dropdown-item" href="/charts/CPU_final_line">查看文件</a></li>
+              </ul>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.user.is_authenticated and request.session.fname %}

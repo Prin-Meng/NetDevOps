@@ -28,8 +28,11 @@ urlpatterns = [
     path('add_devices', add_devices),
     path('show_devices', show_devices),
     path('delete_device/<int:device_id>', delete_devices),
+    # 图表信息
     path('charts/', include(('charts.urls', 'charts'), namespace='charts')),
     # 登录、登出，固定URL不能改变
     path('accounts/login/', qyt_login),
     path('accounts/logout/', qyt_logout),
+    # 文件管理
+    path('file_mgmt/', include(('file_mgmt.urls', 'file_mgmt'), namespace='file_mgmt')),
 ]
