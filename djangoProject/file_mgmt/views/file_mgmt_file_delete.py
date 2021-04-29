@@ -1,3 +1,3 @@
 
-def delete_files():
+def delete_file():
     pass

@@ -50,6 +50,8 @@ class UploadFile(models.Model):
                                  related_name='upload_files',
                                  on_delete=models.CASCADE,
                                  verbose_name='hash hex字符串')
+    # 上传时间
+    upload_datetime = models.DateTimeField(null=True, auto_now_add=True)
 
     def __str__(self):
         return f"{self.__class__.__name__}(拥有者:{self.file_owner_name.name}" \

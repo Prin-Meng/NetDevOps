@@ -1,46 +1,107 @@
 {% extends 'base.html' %}
+
 {% block title %}
     乾颐堂DJG内部系统
 {% endblock title %}
 
 {% block head %}
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 {% endblock head %}
+
+{% block js %}
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+{% endblock js %}
+
 {% block body %}
-<div class="container-fluid">
-    <br><h3 style="color: #666666">文件上传</h3>
-            <div class="alert alert-primary" role="alert" style="color: yellowgreen">
-                <i class="fas fa-bell"></i><strong>   支持多文件上传</strong>
-            </div>
-            <div class="alert alert-danger" role="alert">
-                <i class="fas fa-sun" style="color: red"></i><strong>   只能允许上传docx类型文件</strong>
-            </div>
-            <form action="" method="post" enctype="multipart/form-data">
-                    {# CSRF跨站请求伪造 #}
-                    {# 添加CSRF防护的隐含参数Token,这是必须配置内容,并不是可选,注意使用render来渲染页面 #}
-                    {# <input type="hidden" name="csrfmiddlewaretoken" value="BuPkZVju5knmAuRpSZi5C3GMJh8U9IXFhPixPfQ1PDPmDZfeknt1hHREYlZkrvJZ">#}
-                    {% csrf_token %}
+    <div class="container-fluid">
+        <br><h2 style="color: #666666">上传文件</h2><br>
+    {% if successmessage %}
+        <span class="message"><div class="alert alert-success" role="alert">{{ successmessage }}</div></span>
+    {% endif %}
 
+    {% if warningmessage %}
+        <span class="message"><div class="alert alert-warning" role="alert">{{ warningmessage}}</div></span>
+    {% endif %}
 
-                    <div class=form-group>
-                        {# 多文件上传需要使用multiple #}
-                        <input type="file" name="files[]" multiple>
-                    </div>
+    {% if errormessage %}
+            <span class="message"><div class="alert alert-danger" role="alert">{{ errormessage }}</div></span>
+    {% endif %}
+    {# 创建显示学员信息的Table,注意id="QYT_Table", 后续DataTable JavaScript就对这个ID的Table进行渲染优化 #}
+    <table class="table table-bordered" id="QYT_Table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">文件名</th>
+          <th scope="col">上传时间</th>
+          <th scope="col" width="100">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for file in files_list %}
+        <tr>
+          {# 通过forloop.counter来显示行号,请注意这个不是设备唯一ID #}
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ file.file_raw_name }}</td>
+          <td>{{ file.upload_datetime | date:'Y-m-d H:i' }}</td>
+          {# 添加删除和编辑按钮 #}
+          {# href嵌入传入的删除和编辑的超链接 #}
+          {# onclick="return confirmAct() 用于在删除对象之前显示确认删除的警告信息 #}
+          {# data-toggle="tooltip" data-placement="top" title="删除此设备信息" 用于显示按钮的提示信息 #}
+          {# class="badge badge-danger" class="badge badge-success" bootstrap渲染按钮的类型 #}
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="{{ file.download_url }}" data-toggle="tooltip" data-placement="top" title="下载此文件"><i class="fas fa-download"></i></a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="{{ file.delete_url }}" onclick="return confirmAct();" data-toggle="tooltip" data-placement="top" title="删除此文件"><i class="fas fa-trash-alt" style="color: indianred"></i></a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
 
-                    {# 调整了bootstrap的显示样式 https://getbootstrap.com/docs/4.1/components/buttons/#button-tags#}
-                    <input class="btn btn-primary btn-lg" type='submit' value='提交'><br>
-                    {# 每一个文件处理结果的信息会显示到这里 #}
-                    {# 根据处理结果的不同,使用不同的颜色 #}
-                    {% for message in messages %}
-                        {% if "上传成功" in message %}
-                            <span class="message" style="color: greenyellow">&nbsp;{{ message }}</span>
-                        {% elif "已经覆盖上一次批改" in message %}
-                            <span class="message" style="color: dodgerblue">&nbsp;{{ message }}</span>
-                        {% else %}
-                            <span class="message" style="color: red">&nbsp;{{ message }}</span>
-                        {% endif %}
-                        <br>
-                    {% endfor %}
-            </form>
-</div>
+    {# DataTable渲染显示设备信息的Table #}
+    {# 需要加载如下的CSS和JS #}
+    {# <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> #}
+    {# <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> #}
+
+    <script>
+    $(document).ready( function () {
+        $('#QYT_Table').DataTable();
+    } );
+    </script>
+    {# DataTable中点击任何一个条目变深色,表示被选中功能的JavaScript #}
+    <script>
+    $(document).ready(function() {
+        var table = $('#QYT_Table').DataTable();
+
+        $('#QYT_Table tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        } );
+
+        $('#button').click( function () {
+            table.row('.selected').remove().draw( false );
+        } );
+    } );
+    </script>
+    {# 提示删除确认警告的JavaScript #}
+    <script type="text/javascript" language="javascript">
+
+    function confirmAct()
+    {
+        if(confirm('确定要执行此删除操作吗?'))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    </script>
 {% endblock body %}
