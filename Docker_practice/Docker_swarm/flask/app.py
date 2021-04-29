@@ -15,7 +15,7 @@ def return_hostname():
 @app.route('/')
 def hello():
     host = return_hostname()
-    return f'Hello world version 1.0, I am {host}\n'
+    return f'Hello world version 2.0, I am {host}\n'
 
 
 if __name__ == '__main__':
