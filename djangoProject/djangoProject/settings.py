@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'qyt_devices',
     'charts',
-    'file_mgmt',
+    'file_mgmt'
 ]
 
 MIDDLEWARE = [
