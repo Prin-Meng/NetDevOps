@@ -55,5 +55,5 @@ class UploadFile(models.Model):
 
     def __str__(self):
         return f"{self.__class__.__name__}(拥有者:{self.file_owner_name.name}" \
-                                        f"| 原始名称:{self.file_raw_name}" \
-                                        f"| HASH值:{self.hash_hex.hash_hex})"
+               f"| 原始名称:{self.file_raw_name}" \
+               f"| HASH值:{self.hash_hex.hash_hex})"

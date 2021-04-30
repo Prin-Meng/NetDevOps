@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from file_mgmt.models import UploadFile, OwnerName
+from django.contrib.auth.decorators import login_required
 
 
+@login_required()
 def show_files(request, successmessage=None, errormessage=None):
     # 查询整个数据库的信息 object.all()
     result = UploadFile.objects.filter(file_owner_name=OwnerName.objects.get(name=request.user.get_username()))

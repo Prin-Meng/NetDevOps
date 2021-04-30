@@ -1,8 +1,10 @@
 from file_mgmt.views.file_mgmt_file_show import show_files
 from file_mgmt.models import UploadFile,OwnerName
 import os
+from django.contrib.auth.decorators import login_required
 
 
+@login_required()
 def delete_file(request, file_id):
     try:
         # 获取对应ID的文件

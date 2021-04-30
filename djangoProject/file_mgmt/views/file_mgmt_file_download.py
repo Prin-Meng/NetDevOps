@@ -2,8 +2,10 @@ from file_mgmt.models import UploadFile, OwnerName
 from django.http import StreamingHttpResponse
 from django.utils.http import urlquote
 from file_mgmt.views.file_mgmt_file_show import show_files
+from django.contrib.auth.decorators import login_required
 
 
+@login_required()
 def download_file(request, file_id):
     try:
         # 搜索请求用户名下的文件

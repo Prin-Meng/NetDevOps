@@ -10,7 +10,9 @@
 {% endblock head %}
 
 {% block js %}
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    {% load static %}
+    <script src="{% static "js/jquery.min.js"%}" crossorigin="anonymous"></script>
+    <script src="{% static "js/jquery.dataTables.min.js"%}" crossorigin="anonymous"></script>
 {% endblock js %}
 
 {% block body %}
@@ -29,7 +31,7 @@
     {% endif %}
     {# 创建显示学员信息的Table,注意id="QYT_Table", 后续DataTable JavaScript就对这个ID的Table进行渲染优化 #}
     <table class="table table-bordered" id="QYT_Table">
-      <thead class="thead-dark">
+      <thead class="table-dark">
         <tr>
           <th scope="col">#</th>
           <th scope="col">文件名</th>
