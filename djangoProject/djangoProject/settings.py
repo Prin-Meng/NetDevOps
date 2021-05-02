@@ -14,7 +14,6 @@ import django
 from pathlib import Path
 import os
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +26,7 @@ SECRET_KEY = 'django-insecure-#=r0qt2ep4#n!mewjy3(er651y-v+x5ra_hn3c5pdb-pg=^35w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.188', 'www.qytangnetwork.com']
+ALLOWED_HOSTS = ['192.168.0.188', 'www.qytangnetwork.com', '192.168.0.166', 'djg.mingjiao.org']
 
 # Application definition
 
