@@ -75,7 +75,7 @@ for dict_info in device_db:
 # --------------------------设备CPU信息----------------------------
 print('收集信息中......')
 
-for x in range(50):
+for x in range(10):
     snmpv2_info = snmpv2_get("192.168.0.66", "tcpipro", "1.3.6.1.4.1.9.9.109.1.1.1.1.3.7", port=161)
     device_cpu_router = Devicecpu(device=Devicedb.objects.get(name='网关路由器'), cpu_usage=snmpv2_info[1])
 
