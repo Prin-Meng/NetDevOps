@@ -41,11 +41,9 @@ def rpc_upload():
         if client_upload_name:
             image_b64 = client_post_data.get('file')
             print(image_b64)
-            with open(client_upload_name, 'w+') as f:
+            with open(client_upload_name, 'wb') as f:
                 image_decode = base64.b64decode(image_b64)
-                print(image_decode)
-                print(str(image_decode))
-                # f.write(image_decode.decode(encoding='utf-8'))
+                f.write(image_decode)
             print('上传文件{0}保存成功！'.format(client_upload_name))
             return_data = {'message': 'Upload Success', 'upload_file': client_upload_name}
             return Response(response=json.dumps(return_data),
@@ -69,7 +67,6 @@ def rpc_download():
             try:
                 with open(client_download_name, 'rb') as f:
                     read_data = f.read()
-                    print(read_data)
                     bytes_b64code = base64.b64encode(read_data)
                 return_data = {'download_file': client_download_name, 'file': bytes_b64code.decode()}
 
