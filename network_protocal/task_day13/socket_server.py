@@ -14,7 +14,6 @@ def server_json(ip, port):
     # 在拒绝连接前，操作系统可以挂起的最大连接数量，一般配置为5
     sockobj.listen(5)
 
-
     while True:  # 一直接受请求，直到ctl+c终止程序
         try:
             # 接受TCP连接，并且返回（conn,address）的元组，conn为新的套接字对象，可以用来接收和发送数据，address是连接客户端的地址
