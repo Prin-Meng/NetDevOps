@@ -75,7 +75,7 @@ class Devicedb(models.Model):
     create_datetime = models.DateTimeField(null=True, auto_now_add=True)
 
     def __str__(self):
-        return f"{self.__class__.__name__}(设备类型:{self.name})" \
+        return f"{self.__class__.__name__}(设备类型:{self.name}" \
                f"| SNMP类型:{self.type.name}" \
                f"| OID:{self.ip})"
 
