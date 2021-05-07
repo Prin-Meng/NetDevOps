@@ -1,8 +1,8 @@
-<get-config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-  <source>
+<edit-config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <target>
     <running/>
-  </source>
-  <filter>
+  </target>
+  <config>
     <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
       <logging>
         <trap>
@@ -11,5 +11,5 @@
         <hostip>{{host_address}}</hostip>
       </logging>
     </native>
-  </filter>
-</get-config>
+  </config>
+</edit-config>

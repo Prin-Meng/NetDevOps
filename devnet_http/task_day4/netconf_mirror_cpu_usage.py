@@ -4,7 +4,7 @@ import xmltodict
 from pprint import pprint
 
 
-def csr_monitor_cpu(device_ip, username, password, monitor_type='5s'):
+def get_cpu(device_ip, username, password, monitor_type='5s'):
     if monitor_type == '1m':
         monitor_type_use = 'one-minute'
     elif monitor_type == '5m':
@@ -19,4 +19,4 @@ def csr_monitor_cpu(device_ip, username, password, monitor_type='5s'):
 
 if __name__ == '__main__':
     # 监控最近五秒钟CPU利用率
-    print(csr_monitor_cpu('192.168.0.88', 'Prin', 'Cisc0123', '5s'))
+    print(get_cpu('192.168.0.88', 'Prin', 'Cisc0123', '5s'))

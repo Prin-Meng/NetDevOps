@@ -3,7 +3,7 @@ from netconf_request import csr_netconf_config
 from pprint import pprint
 
 
-def csr_syslong_config(device_ip, username, password, security_id, host):
+def conf_log(device_ip, username, password, security_id, host):
     result = csr_netconf_config(device_ip, username, password, netconf_config_syslog(security_id, host), port='830')
     print(result)
     # xmldict = xmltodict.parse(result_xml)
@@ -12,4 +12,4 @@ def csr_syslong_config(device_ip, username, password, security_id, host):
 
 
 if __name__ == '__main__':
-    csr_syslong_config('192.168.0.88', 'Prin', 'Cisc0123', '7', '192.168.0.88')
+    conf_log('192.168.0.88', 'Prin', 'Cisc0123', '7', '192.168.0.88')
