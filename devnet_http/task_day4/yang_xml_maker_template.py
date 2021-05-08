@@ -1,4 +1,3 @@
-import re
 from jinja2 import Template
 
 tem_path = './jinja2/'
