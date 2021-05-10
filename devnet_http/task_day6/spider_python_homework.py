@@ -35,10 +35,6 @@ def get_homework_info(Username, Password):
 
     home_work_soup = BeautifulSoup(r.text, 'lxml')
 
-    # print(home_work_soup.prettify())
-    # 格式化打印BeautifulSoup对象
-    # print(home_work_soup.find_all('table', id='table-for-student'))
-
     dict_courses_num = {}
     dict_courses_level = {}
 
