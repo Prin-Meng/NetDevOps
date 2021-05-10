@@ -38,7 +38,7 @@ def mat_pie(lable_values_dict, Theme):
 
 
 if __name__ == '__main__':
-    list_info = get_homework_info('pye_menglp', '0Xk-Dwf')
+    list_info = get_homework_info('admin', 'admin')
     mat_pie(list_info[0], '课程作业分布图')
     mat_pie(list_info[1], '课程分数分布图')
 
