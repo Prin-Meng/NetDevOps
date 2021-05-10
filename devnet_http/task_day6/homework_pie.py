@@ -4,6 +4,7 @@ from spider_python_homework import get_homework_info
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['font.family'] = 'sans-serif'
 
+
 def mat_pie(lable_values_dict, Theme):
     # 调节图形大小，宽，高
     plt.figure(figsize=(6, 6))
@@ -40,6 +41,4 @@ if __name__ == '__main__':
     list_info = get_homework_info('pye_menglp', '0Xk-Dwf')
     mat_pie(list_info[0], '课程作业分布图')
     mat_pie(list_info[1], '课程分数分布图')
-    # print(list_info[0])
-    # for x in list_info[0].keys():
-    #     print(x)
+
