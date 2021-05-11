@@ -28,7 +28,7 @@ def get_homework_info(Username, Password):
     csrftoken = qytang_soup.find('input', attrs={'type': "hidden", "name": "csrfmiddlewaretoken"}).get('value')
     # 构建用户名, 密码和csrf值的POST数据
     login_data = {'username': username, 'password': password, "csrfmiddlewaretoken": csrftoken}
-    # # POST提交数据到登录页面
+    # POST提交数据到登录页面
     client.post(url, headers=header, data=login_data, verify=False)
 
     r = client.get('https://qytsystem.qytang.com/python_enhance/python_enhance_homework')

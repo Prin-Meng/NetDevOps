@@ -15,6 +15,7 @@ def add_devices(request):
 
         form = AddDeviceForm(request.POST)
         # 如果请求为POST，并且Form校验通过，把新添加的设备写入数据库
+        print(form.is_valid())
         if form.is_valid():
             devicedb_router = Devicedb(
                 name=request.POST.get('name'),

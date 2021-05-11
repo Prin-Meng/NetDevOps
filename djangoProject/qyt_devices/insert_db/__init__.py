@@ -16,7 +16,7 @@ DeviceSNMP.objects.all().delete()
 SNMPtype.objects.all().delete()
 
 # --------------------------设备类型------------------------------
-device_type = ['CSR1000v']
+device_type = ['CSR1000v','ASA']
 for name in device_type:
     device_type_router = Devicetype(name=name)
     device_type_router.save()
