@@ -12,6 +12,7 @@ auth_url = url + api_path
 
 def get_token():
     try:
+        # 做basic认证，获取token。verif = False的原因是，ASA测试页面的认证无法正常验证
         r = requests.post(auth_url, auth=HTTPBasicAuth(username, password), verify=False)
 
         final_header = http_headers.copy()
