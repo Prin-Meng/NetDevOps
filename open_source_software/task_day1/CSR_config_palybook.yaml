@@ -1,0 +1,80 @@
+---
+- hosts: CSR  # playbook操作的设备
+  gather_facts: fase
+  connection: local
+  vars_files:
+    - config_data.yaml
+
+  tasks:
+    - name: CSR_task_interface # ios_l3_interface(配置IP)
+      ios_l3_interfaces:
+        config:
+          - name: "{{ item.port }}"
+            ipv4:
+            - address: "{{ item.ip }}"
+      with_items: "{{ csr_ifs }}"  # 导入csr_ifs这个部分的配置内容
+      when: (item.router == inventory_hostname)  # 条件判断，当IP地址等于router的IP
+
+    - name: no shutdown interface # ios_interface(打开接口)
+      ios_interfaces:
+        config:
+          - name: "{{ item.port }}"
+            enabled: True
+      with_items: "{{ csr_ifs }}"
+      when: (item.router == inventory_hostname)
+
+    - name: ospf config ospf router-id # ios_config(配置OSPF的router-id)
+      ios_config:
+        lines:
+          - router-id {{ item.routerid }}
+        parents: router ospf 1
+      with_items: "{{ csr_ospf_router_id }}"
+      when: (item.router == inventory_hostname)
+
+    - name: ospf network # ios_config(通告接口到OSPF进程)
+      ios_config:
+        lines:
+          - network {{ item.network }} {{ item.mask }} area {{ item.area }}
+        parents: router ospf 1
+      with_items: "{{ csr_ospf_nets }}"
+      when: (item.router == inventory_hostname)
+
+    - name: domain  # 配置域名
+      ios_system:
+        domain_name: "{{ csr_domain_name}}"
+
+    - name: DNS # 配置DNS
+      ios_system:
+        name_servers:
+          - "{{ csr_name_servers }}"
+
+    - name: logging_level # 配置日志level
+      ios_logging:
+        dest: "{{ item.dest }}"
+        facility: local7
+        level: "{{ item.level }}"
+        state: present
+      with_items: "{{ csr_syslog_level }}"
+
+    - name: logging_host # 配置logging服务器
+      ios_logging:
+        dest: host
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ csr_syslog_hosts }}"
+
+    - name: ios_user # 管理和创建用户
+      no_log: true
+      ios_user:
+        name: "{{ item.username }}"
+        privilege: "{{ item.privilege }}"
+        configured_password: "{{ item.password }}"
+        password_type: password
+        state: present
+      with_items: "{{ csr_user_db }}"
+
+    - name: SAVE CSRS CONFIG  # 任务名字
+      ios_config: # 模块名字
+        backup: yes  # 是否备份
+        save_when: modified  # 当配置修改就保存配置
+...

@@ -1,0 +1,34 @@
+---
+csr_ifs:
+- {ip: 1.1.1.1/32, port: Loopback0, router: 192.168.0.66}
+- {ip: 10.1.1.1/24, port: GigabitEthernet2, router: 192.168.0.66}
+- {ip: 2.2.2.2/32, port: Loopback0, router: 192.168.0.77}
+- {ip: 10.1.1.2/24, port: GigabitEthernet2, router: 192.168.0.77}
+
+csr_ospf_nets:
+- {area: 0, mask: 0.0.0.0, network: 1.1.1.1, router: 192.168.0.66}
+- {area: 0, mask: 0.0.0.255, network: 10.1.1.0, router: 192.168.0.66}
+- {area: 0, mask: 0.0.0.0, network: 2.2.2.2, router: 192.168.0.77}
+- {area: 0, mask: 0.0.0.255, network: 10.1.1.0, router: 192.168.0.77}
+
+csr_ospf_router_id:
+- {router: 192.168.0.66, routerid: 1.1.1.1}
+- {router: 192.168.0.77, routerid: 2.2.2.2}
+
+csr_domain_name: "qytang.com"
+
+csr_name_servers: "114.114.114.114 8.8.8.8"
+
+
+csr_syslog_level:
+- {dest: console, level: notifications}
+
+csr_syslog_hosts:
+- 192.168.0.188
+- 192.168.0.166
+
+csr_user_db:
+- {username: qytadmin, privilege: 15, password: Cisc0123}
+- {username: otheradmin, privilege: 1, password: Cisc0123}
+
+...
