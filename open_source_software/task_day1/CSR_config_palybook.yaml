@@ -23,7 +23,7 @@
       with_items: "{{ csr_ifs }}"
       when: (item.router == inventory_hostname)
 
-    - name: ospf config ospf router-id # ios_config(配置OSPF的router-id)
+    - name: ospf router-id # ios_config(配置OSPF的router-id)
       ios_config:
         lines:
           - router-id {{ item.routerid }}
