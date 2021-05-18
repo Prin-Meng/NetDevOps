@@ -124,4 +124,4 @@ def config_routers(task:Task) -> Result:
 run_result = routers.run(task=config_routers,
                          name='配置CSR路由器', )
 print_result(run_result)
-print(run_result['csr1'].result)
+
