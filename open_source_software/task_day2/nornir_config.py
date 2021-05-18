@@ -67,7 +67,7 @@ def config_routers(task:Task) -> Result:
     # ---------------------------------配置Logging----------------------------
     # 读取模板，并通过参数render为具体配置
     ios_logging_template = task.run(
-        name='第三步.1:读取logging接口配置模板',
+        name='第三步.1:读取logging服务器配置模板',
         task=template_file,
         template='cisco_logging_config.template',
         path=templates_path
