@@ -76,58 +76,6 @@ services:
         hard: -1
     restart: always
 
-  elastiflow-logstash:
-    image: robcowart/elastiflow-logstash:4.0.1
-    container_name: elastiflow-logstash
-    volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-    depends_on:
-      - elasticsearch
-    networks:
-      - qyt_net
-    ports:
-      - "2055:2055/udp"
-      - "6343:6343/udp"
-      - "4739:4739/udp"
-    environment:
-      # JVM Heap size - this MUST be at least 3GB (4GB preferred)
-      LS_JAVA_OPTS: '-Xms4g -Xmx4g'
-
-      # ElastiFlow global configuration
-      ELASTIFLOW_AGENT_ID: elastiflow
-      ELASTIFLOW_GEOIP_CACHE_SIZE: 16384
-      ELASTIFLOW_GEOIP_LOOKUP: 'true'
-      ELASTIFLOW_ASN_LOOKUP: 'true'
-      ELASTIFLOW_OUI_LOOKUP: 'false'
-      ELASTIFLOW_POPULATE_LOGS: 'true'
-      ELASTIFLOW_KEEP_ORIG_DATA: 'true'
-      ELASTIFLOW_DEFAULT_APPID_SRCTYPE: '__UNKNOWN'
-
-      ELASTIFLOW_ES_HOST: 'elasticsearch:9200'
-      #ELASTIFLOW_ES_USER: 'elastic'
-      #ELASTIFLOW_ES_PASSWD: 'changeme'
-
-      ELASTIFLOW_NETFLOW_IPV4_PORT: 2055
-      ELASTIFLOW_NETFLOW_UDP_WORKERS: 2
-      ELASTIFLOW_NETFLOW_UDP_QUEUE_SIZE: 4096
-      ELASTIFLOW_NETFLOW_UDP_RCV_BUFF: 33554432
-
-      ELASTIFLOW_SFLOW_IPV4_PORT: 6343
-      ELASTIFLOW_SFLOW_UDP_WORKERS: 2
-      ELASTIFLOW_SFLOW_UDP_QUEUE_SIZE: 4096
-      ELASTIFLOW_SFLOW_UDP_RCV_BUFF: 33554432
-
-      ELASTIFLOW_IPFIX_UDP_IPV4_PORT: 4739
-      ELASTIFLOW_IPFIX_UDP_WORKERS: 2
-      ELASTIFLOW_IPFIX_UDP_QUEUE_SIZE: 4096
-      ELASTIFLOW_IPFIX_UDP_RCV_BUFF: 33554432
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    restart: always
-
 networks:
   qyt_net:
     driver: bridge
