@@ -9,9 +9,9 @@ processors:
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
-  index: "qytang-asa-%{+yyyy.MM.dd}"
+  index: "qytang-iso-%{+yyyy.MM.dd}"
 
 setup.kibana.host: "http://kibana:5601"
-setup.template.name: "qytang-asa"
-setup.template.pattern: "qytang-asa-*"
+setup.template.name: "qytang-ios"
+setup.template.pattern: "qytang-ios-*"
 setup.ilm.enabled: false

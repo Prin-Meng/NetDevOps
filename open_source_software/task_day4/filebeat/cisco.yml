@@ -3,7 +3,7 @@
 
 - module: cisco
   asa:
-    enabled: true
+    enabled: false
 
     # Set which input to use between syslog (default) or file.
     #var.input: syslog
@@ -39,17 +39,17 @@
     #var.log_level: 7
 
   ios:
-    enabled: false
+    enabled: true
 
     # Set which input to use between syslog (default) or file.
     #var.input: syslog
 
     # The interface to listen to UDP based syslog traffic. Defaults to
     # localhost. Set to 0.0.0.0 to bind to all available interfaces.
-    #var.syslog_host: localhost
+    var.syslog_host: 0.0.0.0
 
     # The UDP port to listen for syslog traffic. Defaults to 9002.
-    #var.syslog_port: 9002
+    var.syslog_port: 9002
 
     # Set custom paths for the log files when using file input. If left empty,
     # Filebeat will choose the paths depending on your OS.
