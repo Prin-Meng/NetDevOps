@@ -39,7 +39,7 @@ for device in CSR_Group:
 
         # 根据打印出的json格式信息，输出是OSPF的路由信息
         for ospf_route in route:
-            if ospf_route['protocol'] == ('O' or 'IA' or 'N1' or 'N1' or 'N2' or 'E1' or 'E2'):
+            if ospf_route['protocol'] == ('O' or 'IA' or 'N1' or 'N2' or 'E1' or 'E2'):
                 print(
                     f"OSPF路由:network {ospf_route['network']}/mask {ospf_route['mask']} nexthop_ip {ospf_route['nexthop_ip']}")
     except Exception as e:
