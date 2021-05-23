@@ -33,7 +33,7 @@ for device in CSR_Group:
                 print(f'{interface["intf"]} is up!  IP address: {interface["ipaddr"]}')
 
         # 通过textfsm模板对路由条目进行分析
-        print('*' * 50, f"{device['ip']}OSPF路由信息", '*' * 50)
+        print('*' * 50, f"{device['ip']}OSPF的路由信息", '*' * 50)
         route = connect.send_command('show ip route', use_textfsm=True)
         # print(json.dumps(route, indent=2))
 
