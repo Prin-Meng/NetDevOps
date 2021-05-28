@@ -1,0 +1,41 @@
+version: '3'
+services:
+  # influxdb容器
+  influxDB:
+    image: "influxdb"
+    user: root
+    environment:
+      - INFLUXDB_DB=devdb   # 数据库
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=Cisc0123
+      - INFLUXDB_USER=devdbuser
+      - INFLUXDB_USER_PASSWORD=Cisc0123
+    volumes:
+      - /influx/influxdb:/var/lib/influxdb  # 数据卷
+      - /network_protocal/practice_work/influx_db/init-influxdb.sh:/docker-entrypoint-initdb.d/init-influxdb.sh  # 初始化脚本
+    networks:
+      - influx_net  # 网络
+    ports:
+      - "8086:8086"
+    restart: always
+
+  # 用grafana做图形化界面
+  grafana:
+    # 镜像名称
+    image: "grafana/grafana"
+    user: root
+    volumes:
+      - /influx/grafana:/var/lib/grafana
+    networks:
+      - influx_net
+    # 开放端口
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "influxDB"
+    restart: always
+
+# 创建网络
+networks:
+  influx_net:
+    driver: bridge
