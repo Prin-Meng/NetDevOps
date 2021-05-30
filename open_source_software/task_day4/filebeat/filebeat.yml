@@ -9,9 +9,9 @@ processors:
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
-  index: "qytang-ios-%{+yyyy.MM.dd}"
+  index: "netdevops-ios-%{+yyyy.MM.dd}"
 
 setup.kibana.host: "http://kibana:5601"
-setup.template.name: "qytang-ios"
-setup.template.pattern: "qytang-ios-*"
+setup.template.name: "netdevops-ios"
+setup.template.pattern: "netdevops-ios-*"
 setup.ilm.enabled: false

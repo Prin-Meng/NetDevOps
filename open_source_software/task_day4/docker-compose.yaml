@@ -1,25 +1,24 @@
 version: '2.2'
 services:
+# ElasticSearch容器相关定义内容
   elasticsearch:
+  # 镜像名称
     image: elastic/elasticsearch:7.8.1
     privileged: true
-    environment:
+    environment:  # ES设置，这里并没有做集群
       - discovery.type=single-node
-      - node.name=qytang_es
-      - cluster.name=qytang_es_cluster
+      - node.name=netdevops_es
+      - cluster.name=netdevops_es_cluster
       - network.host=0.0.0.0
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"   # 资源控制，这里给了4g内存，可以根据自己的设备性能进行调整
     volumes:
-#      - /usr/share/elasticsearch/data  # 数据持久化
-# 提前需要配置一下时间相关文件
-# cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-# echo 'Asia/Shanghai' >/etc/timezone
-      - /etc/timezone:/etc/timezone:ro
+      - /usr/share/elasticsearch/data  # 数据持久化
+      - /etc/timezone:/etc/timezone:ro   # 调整容器内的时间
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - qyt_net
-    ports:
+      - efk_net   # efk连接的网络
+    ports:   # 端口映射
       - "9200:9200"
       - "9300:9300"
     ulimits:
@@ -30,21 +29,21 @@ services:
         soft: 65536
         hard: 65536
     restart: always
-
+# 定义kibana容器
   kibana:
     image: elastic/kibana:7.8.1
     privileged: true
     environment:
-      - SERVER_NAME=qyt_kibana
+      - SERVER_NAME=netdevops_kibana
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - PATH_DATA=/usr/share/kibana/data
       - NODE_OPTIONS="--max_old_space_size=4096"
     volumes:
-#      - /usr/share/kibana/data  # 数据持久化
+      - /usr/share/kibana/data  # 数据持久化
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - qyt_net
+      - efk_net
     ports:
       - "5601:5601"
     ulimits:
@@ -54,7 +53,7 @@ services:
     depends_on:
       - "elasticsearch"
     restart: always
-
+# 定义图形化界面的容器
   filebeat:
     image: elastic/filebeat:7.8.1
     privileged: true
@@ -64,9 +63,9 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - qyt_net
+      - efk_net
     ports:
-      - "514:9002/udp"
+      - "514:9002/udp"  # 将宿主机514端口映射到容器内部的9002端口，9002端口专门处理和分析思科IOS系统的日志信息，并分词
     depends_on:
       - "elasticsearch"
       - "kibana"
@@ -76,6 +75,7 @@ services:
         hard: -1
     restart: always
 
+# 定义桥接网络
 networks:
-  qyt_net:
+  efk_net:
     driver: bridge

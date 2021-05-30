@@ -1,25 +1,24 @@
 version: '2.2'
 services:
+# ElasticSearch容器相关定义内容，做收集流的数据库
   elasticsearch:
+    # 镜像名称
     image: elastic/elasticsearch:7.8.1
     privileged: true
-    environment:
+    environment:  # ES设置，这里并没有做集群
       - discovery.type=single-node
-      - node.name=qytang_es
-      - cluster.name=qytang_es_cluster
+      - node.name=netdevops_es
+      - cluster.name=netdevops_es_cluster
       - network.host=0.0.0.0
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"   # 资源控制，这里给了4g内存，可以根据自己的设备性能进行调整
     volumes:
-#      - /usr/share/elasticsearch/data  # 数据持久化
-# 提前需要配置一下时间相关文件
-# cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-# echo 'Asia/Shanghai' >/etc/timezone
-      - /etc/timezone:/etc/timezone:ro
+      - /usr/share/elasticsearch/data  # 数据持久化
+      - /etc/timezone:/etc/timezone:ro   # 调整容器内的时间
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - qyt_net
-    ports:
+      - elastiflow_net   # efk连接的网络
+    ports:   # 端口映射
       - "9200:9200"
       - "9300:9300"
     ulimits:
@@ -30,21 +29,21 @@ services:
         soft: 65536
         hard: 65536
     restart: always
-
+# 定义kibana容器，做最终的图形化界面呈现
   kibana:
     image: elastic/kibana:7.8.1
     privileged: true
     environment:
-      - SERVER_NAME=qyt_kibana
+      - SERVER_NAME=netdevops_kibana
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - PATH_DATA=/usr/share/kibana/data
       - NODE_OPTIONS="--max_old_space_size=4096"
     volumes:
-#      - /usr/share/kibana/data  # 数据持久化
+      - /usr/share/kibana/data  # 数据持久化
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - qyt_net
+      - elastiflow_net
     ports:
       - "5601:5601"
     ulimits:
@@ -54,24 +53,25 @@ services:
     depends_on:
       - "elasticsearch"
     restart: always
-
+  # 通过elastiflow做netflow流量收集
   elastiflow-logstash:
+    # 镜像名称
     image: robcowart/elastiflow-logstash:4.0.1
     container_name: elastiflow-logstash
-    volumes:
+    volumes:   # 同步时间
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - elasticsearch
     networks:
-      - qyt_net
+      - elastiflow_net
     ports:
       - "2055:2055/udp"
       - "6343:6343/udp"
       - "4739:4739/udp"
     environment:
       # JVM Heap size - this MUST be at least 3GB (4GB preferred)
-      LS_JAVA_OPTS: '-Xms4g -Xmx4g'
+      LS_JAVA_OPTS: '-Xms4g -Xmx4g'  # 调整内存
 
       # ElastiFlow global configuration
       ELASTIFLOW_AGENT_ID: elastiflow
@@ -86,7 +86,7 @@ services:
       ELASTIFLOW_ES_HOST: 'elasticsearch:9200'
       #ELASTIFLOW_ES_USER: 'elastic'
       #ELASTIFLOW_ES_PASSWD: 'changeme'
-
+      #支持的三种流收集
       ELASTIFLOW_NETFLOW_IPV4_PORT: 2055
       ELASTIFLOW_NETFLOW_UDP_WORKERS: 2
       ELASTIFLOW_NETFLOW_UDP_QUEUE_SIZE: 4096
@@ -108,5 +108,5 @@ services:
     restart: always
 
 networks:
-  qyt_net:
+  elastiflow_net:
     driver: bridge
