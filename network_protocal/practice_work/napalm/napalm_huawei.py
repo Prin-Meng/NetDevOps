@@ -25,15 +25,15 @@ while True:
         # 对加载的配置文件和当前运行配置进行比较
         differences = SW.compare_config()
         if len(differences) > 0:
-            # 打印出不同点
+            # 打印出给出标准配置对比当前运行配置有变动的地方
             print(ip + ':' + differences)
             # 获取当前时间的字符串
             now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             # 将检查配置文件写入记事本中
             with open('change_config', 'a') as f:
                 f.write(now + '\n\t' + ip + ':\n\t' + differences + '\n')
-            # 如果配置了下面一条代码，则将设备恢复初始配置
-            SW.commit_config()
+            # 如果配置了下面一条代码，则将设备的配置信息按照提供的配置文件进行还原
+            # SW.commit_config()
         else:
             print(ip + ':' + '配置没有修改')
             SW.discard_config()
