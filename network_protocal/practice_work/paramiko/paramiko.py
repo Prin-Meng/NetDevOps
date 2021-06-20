@@ -4,7 +4,7 @@ import paramiko
 import time
 
 
-def ssh(ip, username, password, cmds, port=22):
+def qytang_ssh(ip, username, password, port=22, cmd='dis cu\n'):
     try:
         ssh = paramiko.SSHClient()
         ssh.load_system_host_keys()
@@ -12,8 +12,7 @@ def ssh(ip, username, password, cmds, port=22):
         ssh.connect(ip, port, username, password, timeout=5, compress=True)
         print("You have successfully connect to " + ip + '\n')
         command = ssh.invoke_shell()
-        for cmd in cmds:
-            command.send(cmd)
+        command.send(cmd)
         time.sleep(2)
         output = command.recv(65535)
         x = output.decode('ascii')
@@ -29,11 +28,5 @@ if __name__ == '__main__':
     ip = "192.168.56.11"
     username = "prin"
     password = "Huawei@123"
-    cmds = []
 
-    with open('config.txt', 'r') as f:
-        for line in f.readlines():
-            cmds.append(line)
-        print(cmds)
-
-    print(ssh(ip, username, password, cmds))
+    qytang_ssh(ip, username, password,)

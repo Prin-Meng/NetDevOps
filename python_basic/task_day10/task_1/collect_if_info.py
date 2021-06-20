@@ -4,7 +4,7 @@ import re
 import pprint
 
 
-def qytang_get_if(*ips, username='admin', password='Huawei@123'):
+def qytang_get_if(ips, username='admin', password='Huawei@123'):
     device_if_dict = {}
     for ip in ips:
         result = qytang_ping(ip)
@@ -21,4 +21,4 @@ def qytang_get_if(*ips, username='admin', password='Huawei@123'):
 
 
 if __name__ == '__main__':
-    pprint.pprint(qytang_get_if('192.168.0.11', '192.168.0.22', username='prin', password='Huawei@123'))
+    pprint.pprint(qytang_get_if('192.168.56.11', username='prin', password='Huawei@123'))
